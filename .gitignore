@@ -25,6 +25,9 @@
 /prisma/dev.db
 /prisma/*.db
 
+# claude code (réglages locaux)
+.claude/settings.local.json
+
 # divers
 .DS_Store
 *.pem
