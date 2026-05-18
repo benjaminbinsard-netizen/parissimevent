@@ -1,0 +1,19 @@
+{
+  "name": "Maison Parissim — Événementiel & Communication d'exception",
+  "short_name": "Maison Parissim",
+  "description": "Agence événementielle d'exception. Paris · Saint-Tropez. Sur invitation.",
+  "lang": "fr-FR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c0a08",
+  "theme_color": "#0c0a08",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

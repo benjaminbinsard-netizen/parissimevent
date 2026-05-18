@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maison Parissim — Événementiel & Communication d'exception</title>
+<meta name="description" content="Maison Parissim — agence événementielle d'exception. Paris · Saint-Tropez. Soirées privées, lancements, événements automobile, corporate et lifestyle. Sur invitation." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ==================================================================
+   MAISON PARISSIM — Site éditorial ultra-premium
+   ================================================================== */
+
+:root {
+  /* Palette antique — noir chaud, ivoire, bronze patiné */
+  --bg: #0c0a08;
+  --bg-2: #100d0a;
+  --surface: #15110c;
+  --line: rgba(232, 220, 199, 0.07);
+  --line-strong: rgba(232, 220, 199, 0.14);
+  --text: #ece3d0;
+  --text-warm: #d6c8a8;
+  --text-dim: #95897a;
+  --text-faint: #5a5247;
+
+  /* Bronze antique — plus doux que de l'or pur */
+  --bronze: #b09472;
+  --bronze-light: #c9ad88;
+  --bronze-deep: #826a4d;
+  --champagne: #d4bc94;
+
+  --shadow: 0 40px 100px rgba(0,0,0,0.6);
+
+  /* Typographie — Fraunces (éditorial) + Inter Tight (cleane) */
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-body: 'Inter Tight', system-ui, -apple-system, sans-serif;
+
+  --maxw: 1480px;
+  --pad: clamp(24px, 5vw, 88px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-slow: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+
+/* Grain éditorial — texture papier */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.92  0 0 0 0 0.85  0 0 0 0 0.72  0 0 0 0.045 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+}
+
+/* Vignette douce */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.35) 100%);
+}
+
+/* Curseur sur-mesure */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  left: 0; top: 0;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 5px; height: 5px;
+  background: var(--bronze-light);
+  border-radius: 50%;
+  transition: opacity 0.2s, transform 0.1s ease-out;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(212, 188, 148, 0.6);
+  border-radius: 50%;
+  transition: width 0.4s var(--ease), height 0.4s var(--ease), opacity 0.3s, border-color 0.3s;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring.hover {
+  width: 64px; height: 64px;
+  border-color: var(--bronze-light);
+}
+@media (hover: none), (max-width: 880px) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ==================================================================
+   LOADER
+================================================================== */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 1.2s var(--ease), visibility 1.2s;
+}
+.loader.hidden { opacity: 0; visibility: hidden; }
+.loader-monogram {
+  font-family: var(--f-display);
+  font-size: clamp(56px, 9vw, 120px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bronze);
+  opacity: 0;
+  letter-spacing: -0.02em;
+  animation: loaderIn 2s 0.2s var(--ease) forwards;
+}
+.loader-tag {
+  margin-top: 18px;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  opacity: 0;
+  animation: loaderIn 1.6s 0.8s var(--ease) forwards;
+}
+.loader-bar {
+  margin-top: 48px;
+  width: 1px;
+  height: 80px;
+  background: rgba(232, 220, 199, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+.loader-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bronze);
+  transform-origin: top;
+  animation: loaderBar 2.2s 0.4s var(--ease-slow) forwards;
+}
+@keyframes loaderIn { to { opacity: 1; } }
+@keyframes loaderBar { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
+
+/* ==================================================================
+   NAV
+================================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 24px var(--pad);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 40px;
+  transition: padding 0.6s var(--ease), background 0.6s var(--ease), border-color 0.6s;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  padding: 14px var(--pad);
+  background: rgba(12, 10, 8, 0.78);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-bottom-color: var(--line);
+}
+.nav-left, .nav-right { display: flex; align-items: center; gap: 32px; }
+.nav-right { justify-content: flex-end; }
+.nav-brand {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.nav-brand i {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--bronze);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 22px;
+  margin-right: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.nav-links a {
+  position: relative;
+  color: var(--text-warm);
+  padding: 4px 0;
+  transition: color 0.4s;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--bronze);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--ease);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.nav-locale {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
+}
+.nav-locale span { color: var(--bronze); }
+.nav-cta {
+  padding: 12px 24px;
+  border: 1px solid var(--line-strong);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: all 0.5s var(--ease);
+  color: var(--text);
+}
+.nav-cta:hover {
+  background: var(--bronze);
+  color: var(--bg);
+  border-color: var(--bronze);
+}
+@media (max-width: 980px) {
+  .nav-links, .nav-locale { display: none; }
+  .nav { grid-template-columns: auto 1fr auto; }
+}
+
+/* ==================================================================
+   HERO
+================================================================== */
+.hero {
+  position: relative;
+  height: 240vh;
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://images.unsplash.com/photo-1431274172761-fca41d930114?w=2400&q=90&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center 30%;
+  will-change: transform, filter;
+  filter: brightness(0.5) saturate(0.85) contrast(1.05);
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(12,10,8,0.55) 0%,
+      rgba(12,10,8,0.25) 40%,
+      rgba(12,10,8,0.85) 100%);
+}
+
+.hero-meta-top {
+  position: absolute;
+  top: 110px;
+  left: var(--pad);
+  right: var(--pad);
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-warm);
+  z-index: 3;
+  opacity: 0;
+  animation: fadeIn 1.6s 2s var(--ease) forwards;
+}
+.hero-meta-top .pipe { color: var(--bronze); margin: 0 16px; }
+.hero-meta-top .right { text-align: right; }
+@media (max-width: 720px) {
+  .hero-meta-top { font-size: 9px; gap: 16px; }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--pad) 18vh;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  will-change: opacity, transform;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 1.4s 1.4s var(--ease) forwards;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--bronze);
+}
+
+.hero-title {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(56px, 11vw, 178px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  margin-bottom: 40px;
+  font-variation-settings: "opsz" 144;
+}
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+}
+.hero-title .line > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: heroReveal 1.6s var(--ease-slow) forwards;
+}
+.hero-title .line:nth-child(1) > span { animation-delay: 1.6s; }
+.hero-title .line:nth-child(2) > span {
+  animation-delay: 1.78s;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bronze-light);
+}
+@keyframes heroReveal { to { transform: translateY(0); } }
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 40px;
+  margin-top: 24px;
+}
+.hero-sub {
+  max-width: 38ch;
+  color: var(--text-warm);
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 300;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 1.4s 2.1s var(--ease) forwards;
+}
+.hero-sub::first-letter {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.6em;
+  color: var(--bronze);
+  margin-right: 4px;
+  vertical-align: -2px;
+}
+
+.hero-ref {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: right;
+  opacity: 0;
+  animation: fadeUp 1.4s 2.3s var(--ease) forwards;
+}
+.hero-ref strong { color: var(--bronze); font-weight: 400; }
+
+@media (max-width: 720px) {
+  .hero-bottom { grid-template-columns: 1fr; }
+  .hero-ref { text-align: left; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-warm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 1.4s 2.5s var(--ease) forwards;
+}
+.hero-scroll-cue .line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--bronze) 0%, transparent 100%);
+  animation: scrollLine 2.6s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ==================================================================
+   GENERIC
+================================================================== */
+section { position: relative; }
+.section-pad { padding: clamp(100px, 18vh, 220px) var(--pad); }
+.container { max-width: var(--maxw); margin: 0 auto; }
+
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--f-display);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 60px;
+  font-weight: 400;
+}
+.chapter::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--bronze);
+}
+.chapter i {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-warm);
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+
+.h-display {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(40px, 6.5vw, 100px);
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+  font-variation-settings: "opsz" 144;
+}
+.h-display i { font-style: italic; font-weight: 300; color: var(--bronze-light); }
+.lead {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--text-warm);
+  font-weight: 300;
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* ==================================================================
+   INTRO — Maison
+================================================================== */
+.intro {
+  padding: clamp(120px, 20vh, 240px) var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 100px;
+  align-items: start;
+}
+@media (max-width: 980px) { .intro-grid { grid-template-columns: 1fr; gap: 48px; } }
+.intro-aside { position: sticky; top: 140px; }
+.intro-mark {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 200;
+  font-size: clamp(80px, 14vw, 220px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--bronze);
+}
+.intro-aside p {
+  margin-top: 32px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 2;
+}
+.intro-aside p span { display: block; color: var(--bronze); }
+
+.intro-body p {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  margin-bottom: 32px;
+  color: var(--text);
+}
+.intro-body p:first-of-type::first-letter {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 4.5em;
+  line-height: 0.9;
+  float: left;
+  margin: 8px 16px 0 0;
+  color: var(--bronze);
+  font-weight: 300;
+}
+.intro-body p i { font-style: italic; color: var(--bronze-light); }
+.intro-body .signature {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--text-dim);
+  margin-top: 64px;
+  letter-spacing: 0.01em;
+}
+
+/* ==================================================================
+   MANIFESTO
+================================================================== */
+.manifesto {
+  position: relative;
+  height: 380vh;
+  background: var(--bg);
+}
+.manifesto-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.manifesto-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-slow);
+  filter: brightness(0.45) saturate(0.85) contrast(1.05);
+}
+.manifesto-bg-img.active { opacity: 1; }
+.manifesto-bg-img.b1 { background-image: url("https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=2400&q=90&auto=format&fit=crop"); }
+.manifesto-bg-img.b2 { background-image: url("https://images.unsplash.com/photo-1554178286-db408c69256a?w=2400&q=90&auto=format&fit=crop"); }
+.manifesto-bg-img.b3 { background-image: url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=2400&q=90&auto=format&fit=crop"); }
+.manifesto-bg-img.b4 { background-image: url("https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=2400&q=90&auto=format&fit=crop"); }
+.manifesto-pin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(12,10,8,0.55) 100%);
+  pointer-events: none;
+}
+
+.manifesto-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+.manifesto-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pad);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease-slow);
+  pointer-events: none;
+}
+.manifesto-step.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.manifesto-step-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+@media (max-width: 880px) {
+  .manifesto-step-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+.manifesto-step .step-num {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--bronze);
+  margin-bottom: 28px;
+}
+.manifesto-step .step-num::before { content: "—— "; letter-spacing: 0; }
+.manifesto-step h2 {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(40px, 6.5vw, 108px);
+  line-height: 0.96;
+  letter-spacing: -0.024em;
+  max-width: 14ch;
+}
+.manifesto-step h2 i { font-style: italic; font-weight: 300; color: var(--bronze-light); }
+.manifesto-step .step-body {
+  color: var(--text-warm);
+  font-size: 15px;
+  max-width: 38ch;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.manifesto-progress {
+  position: absolute;
+  right: var(--pad);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  z-index: 3;
+}
+.manifesto-progress div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--f-display);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  transition: color 0.5s;
+}
+.manifesto-progress div::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--text-faint);
+  transition: width 0.6s var(--ease), background 0.5s;
+}
+.manifesto-progress div.active { color: var(--bronze); }
+.manifesto-progress div.active::before {
+  width: 56px;
+  background: var(--bronze);
+}
+@media (max-width: 880px) { .manifesto-progress { display: none; } }
+
+/* ==================================================================
+   UNIVERS
+================================================================== */
+.univers { padding: clamp(100px, 18vh, 220px) var(--pad); }
+.univers-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 120px;
+}
+@media (max-width: 880px) { .univers-head { grid-template-columns: 1fr; gap: 32px; } }
+
+.univers-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  aspect-ratio: 4/5;
+  cursor: pointer;
+  transition: transform 0.8s var(--ease);
+}
+.card-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1.6s var(--ease-slow), filter 0.8s;
+  filter: brightness(0.65) saturate(0.85);
+}
+.card:hover .card-img {
+  transform: scale(1.06);
+  filter: brightness(0.5) saturate(1);
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12,10,8,0) 30%, rgba(12,10,8,0.85) 100%);
+  pointer-events: none;
+}
+.card-content {
+  position: absolute;
+  inset: 0;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+}
+.card-num {
+  font-family: var(--f-display);
+  font-style: italic;
+  color: var(--bronze);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  font-weight: 400;
+}
+.card-num::before { content: "— "; }
+.card-title {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: clamp(24px, 2.2vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+}
+.card-title i { font-style: italic; color: var(--bronze-light); }
+.card-meta {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-warm);
+  margin-top: 14px;
+}
+.card-mark {
+  position: absolute;
+  top: 36px; right: 36px;
+  width: 38px; height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: all 0.6s var(--ease);
+  color: var(--text);
+}
+.card:hover .card-mark {
+  background: var(--bronze);
+  color: var(--bg);
+  border-color: var(--bronze);
+  transform: rotate(-45deg);
+}
+
+.card.lg { grid-column: span 7; aspect-ratio: 16/11; }
+.card.md { grid-column: span 5; }
+.card.sm { grid-column: span 4; }
+.card.wide { grid-column: span 8; aspect-ratio: 16/9; }
+@media (max-width: 980px) {
+  .card.lg, .card.md, .card.sm, .card.wide { grid-column: span 12; aspect-ratio: 4/3; }
+}
+
+/* ==================================================================
+   BIG PARALLAX QUOTE
+================================================================== */
+.bigshot {
+  position: relative;
+  height: 110vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bigshot-bg {
+  position: absolute;
+  inset: -15% 0;
+  background-image: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=2400&q=90&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  filter: brightness(0.45) saturate(0.85);
+}
+.bigshot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12,10,8,0.4), rgba(12,10,8,0.65));
+}
+.bigshot-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--pad);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.bigshot-text .quote-mark {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(80px, 12vw, 180px);
+  color: var(--bronze);
+  line-height: 0.5;
+  margin-bottom: 32px;
+  display: block;
+}
+.bigshot-text h2 {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(36px, 5.5vw, 88px);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  max-width: 22ch;
+  margin: 0 auto;
+}
+.bigshot-text h2 i { font-style: italic; color: var(--bronze-light); }
+.bigshot-text .attrib {
+  margin-top: 48px;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-warm);
+}
+.bigshot-text .attrib span { color: var(--bronze); }
+
+/* ==================================================================
+   CITIES
+================================================================== */
+.cities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+@media (max-width: 880px) { .cities { grid-template-columns: 1fr; } }
+.city {
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(40px, 6vw, 80px);
+}
+.city-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) saturate(0.85) contrast(1.05);
+  transition: transform 1.8s var(--ease-slow), filter 1.2s;
+}
+.city.paris .city-bg { background-image: url("https://images.unsplash.com/photo-1431274172761-fca41d930114?w=2200&q=90&auto=format&fit=crop"); }
+.city.st-tropez .city-bg { background-image: url("https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=2200&q=90&auto=format&fit=crop"); }
+.city:hover .city-bg { transform: scale(1.08); filter: brightness(0.65) saturate(1); }
+.city::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12,10,8,0.1) 30%, rgba(12,10,8,0.92) 100%);
+}
+.city-content {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+.city-content .num {
+  font-family: var(--f-display);
+  font-style: italic;
+  color: var(--bronze);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.city-content .num::before { content: "— "; }
+.city-content h3 {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(40px, 6vw, 88px);
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+}
+.city-content h3 i { font-style: italic; color: var(--bronze-light); }
+.city-content p {
+  margin-top: 24px;
+  color: var(--text-warm);
+  max-width: 40ch;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.city-content .meta {
+  margin-top: 40px;
+  display: flex;
+  gap: 32px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.city-content .meta strong { display: block; color: var(--bronze); font-weight: 400; margin-bottom: 6px; }
+
+/* ==================================================================
+   CIBLES
+================================================================== */
+.cibles {
+  padding: clamp(100px, 18vh, 220px) var(--pad);
+  border-top: 1px solid var(--line);
+}
+.cibles-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 100px;
+}
+@media (max-width: 880px) { .cibles-head { grid-template-columns: 1fr; gap: 32px; } }
+
+.cibles-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+@media (max-width: 1100px) { .cibles-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cibles-grid { grid-template-columns: 1fr; } }
+.cible {
+  padding: 56px 32px;
+  border-left: 1px solid var(--line);
+  position: relative;
+  transition: background 0.6s var(--ease);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cible:first-child { border-left: 0; }
+@media (max-width: 1100px) {
+  .cible:nth-child(odd) { border-left: 0; }
+  .cible:nth-child(even) { border-left: 1px solid var(--line); }
+}
+.cible:hover { background: rgba(176, 148, 114, 0.04); }
+.cible .num {
+  font-family: var(--f-display);
+  font-style: italic;
+  color: var(--bronze);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+}
+.cible h4 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+}
+.cible h4 i { font-style: italic; color: var(--bronze-light); }
+.cible p {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-warm);
+  line-height: 1.6;
+}
+
+/* ==================================================================
+   PRESS
+================================================================== */
+.press {
+  padding: clamp(80px, 12vh, 160px) var(--pad);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.press-label {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 60px;
+}
+.press-label span { color: var(--bronze); }
+.press-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 60px 80px;
+}
+.press-name {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: clamp(20px, 2vw, 30px);
+  letter-spacing: 0.04em;
+  color: var(--text-warm);
+  opacity: 0.7;
+  transition: opacity 0.4s, color 0.4s;
+}
+.press-name:hover { opacity: 1; color: var(--bronze); }
+.press-name i { font-style: italic; }
+
+/* ==================================================================
+   STATS
+================================================================== */
+.stats { padding: clamp(100px, 18vh, 220px) var(--pad); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  margin-top: 100px;
+}
+@media (max-width: 880px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; } }
+.stat {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.stat::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 60px;
+  height: 1px;
+  background: var(--bronze);
+}
+.stat-num {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(56px, 6.5vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.024em;
+  font-variation-settings: "opsz" 144;
+}
+.stat-num .plus { color: var(--bronze); font-style: italic; font-weight: 300; }
+.stat-label {
+  margin-top: 20px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-warm);
+}
+.stat-sub {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-style: italic;
+  font-family: var(--f-display);
+}
+
+/* ==================================================================
+   PROCESS
+================================================================== */
+.process {
+  padding: clamp(100px, 18vh, 220px) var(--pad);
+  border-top: 1px solid var(--line);
+}
+.process-list { margin-top: 100px; }
+.process-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.2fr 80px;
+  gap: 48px;
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+  align-items: center;
+  position: relative;
+  transition: padding 0.6s var(--ease);
+}
+.process-item:last-child { border-bottom: 1px solid var(--line); }
+.process-item:hover { padding: 72px 0; }
+.process-item:hover .process-title i { color: var(--bronze-light); }
+.process-item:hover .process-arrow { transform: translateX(8px); color: var(--bronze); }
+.process-num {
+  font-family: var(--f-display);
+  font-style: italic;
+  color: var(--bronze);
+  font-size: 22px;
+  font-weight: 300;
+}
+.process-title {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+}
+.process-title i { font-style: italic; color: var(--text-warm); transition: color 0.5s; }
+.process-desc {
+  color: var(--text-warm);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 46ch;
+}
+.process-arrow {
+  justify-self: end;
+  transition: transform 0.6s var(--ease), color 0.4s;
+  color: var(--text-dim);
+}
+@media (max-width: 880px) {
+  .process-item { grid-template-columns: 40px 1fr; padding: 40px 0 !important; }
+  .process-desc, .process-arrow { grid-column: 2; }
+  .process-arrow { justify-self: start; margin-top: 24px; }
+}
+
+/* ==================================================================
+   CONTACT
+================================================================== */
+.contact {
+  padding: clamp(100px, 18vh, 220px) var(--pad);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.contact-glow {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(176, 148, 114, 0.14), transparent 60%);
+  top: -300px;
+  right: -300px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 100px;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 980px) { .contact-grid { grid-template-columns: 1fr; gap: 60px; } }
+
+.contact-info p.lead { margin-top: 32px; }
+.contact-meta {
+  margin-top: 56px;
+  display: grid;
+  gap: 32px;
+}
+.contact-meta div span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 8px;
+}
+.contact-meta div a, .contact-meta div p {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--text);
+  transition: color 0.4s;
+  letter-spacing: -0.005em;
+}
+.contact-meta div a:hover { color: var(--bronze); }
+
+.form { display: grid; gap: 24px; }
+.field {
+  position: relative;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 6px;
+  transition: border-color 0.4s;
+}
+.field label {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: top 0.5s var(--ease), font-size 0.5s var(--ease), color 0.5s;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: 16px;
+  font-weight: 300;
+  padding: 26px 0 14px;
+  resize: none;
+}
+.field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--bronze) 50%), linear-gradient(135deg, var(--bronze) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 32px, calc(100% - 11px) 32px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+  cursor: pointer;
+}
+.field select option { background: var(--bg); }
+.field textarea { min-height: 96px; }
+.field.filled label, .field input:focus + label, .field textarea:focus + label {
+  top: -8px;
+  font-size: 9px;
+  color: var(--bronze);
+}
+.field:focus-within { border-bottom-color: var(--bronze); }
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 560px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+.privacy {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.privacy a { color: var(--bronze); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.privacy a:hover { border-bottom-color: var(--bronze); }
+
+.submit {
+  margin-top: 24px;
+  padding: 22px 40px;
+  background: var(--bronze);
+  color: var(--bg);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.5s var(--ease);
+  align-self: start;
+  justify-self: start;
+  border: 1px solid var(--bronze);
+}
+.submit:hover {
+  background: transparent;
+  color: var(--bronze-light);
+  transform: translateY(-2px);
+}
+
+/* ==================================================================
+   FOOTER
+================================================================== */
+footer {
+  padding: 120px var(--pad) 40px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 100px;
+}
+@media (max-width: 980px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 48px; } }
+@media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand .h-display { font-size: clamp(40px, 5vw, 80px); }
+.footer-brand p {
+  color: var(--text-warm);
+  max-width: 38ch;
+  margin-top: 28px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.footer-col h5 {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.footer-col ul a {
+  color: var(--text-warm);
+  font-size: 14px;
+  transition: color 0.4s;
+}
+.footer-col ul a:hover { color: var(--text); }
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom a { color: var(--text-faint); transition: color 0.3s; }
+.footer-bottom a:hover { color: var(--text-warm); }
+.footer-mark {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 200;
+  font-size: clamp(140px, 24vw, 420px);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  text-align: center;
+  margin: 60px 0 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-variation-settings: "opsz" 144;
+}
+
+/* ==================================================================
+   REVEAL
+================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 1.4s var(--ease-slow), transform 1.4s var(--ease-slow);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-title .line > span { transform: none; animation: none; }
+  .hero-eyebrow, .hero-sub, .hero-scroll-cue, .hero-ref, .hero-meta-top { opacity: 1; animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-monogram">P</div>
+  <div class="loader-tag">Maison Parissim · Établie 2020</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-brand"><i>P</i> Maison Parissim</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#intro">Maison</a></li>
+    <li><a href="#manifesto">Manifeste</a></li>
+    <li><a href="#univers">Univers</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-locale"><span>FR</span> · EN</div>
+    <a href="#contact" class="nav-cta">Sur invitation</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-sticky">
+    <div class="hero-bg" id="heroBg"></div>
+
+    <div class="hero-meta-top">
+      <div>Paris <span class="pipe">·</span> Saint-Tropez <span class="pipe">·</span> Côte d'Azur</div>
+      <div class="right">Édition MMXXVI <span class="pipe">·</span> N°01</div>
+    </div>
+
+    <div class="hero-inner" id="heroInner">
+      <div class="hero-eyebrow">Maison événementielle d'exception</div>
+      <h1 class="hero-title">
+        <span class="line"><span>Parissim</span></span>
+        <span class="line"><span>Event.</span></span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-sub">L'art discret de l'événement haut de gamme. Soirées confidentielles, lancements de marque, expériences sur-mesure pour une clientèle qui ne se contente pas du convenu.</p>
+        <div class="hero-ref">Établie en <strong>MMXX</strong><br>Paris · Saint-Tropez</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue">
+      <span>Découvrir</span>
+      <div class="line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <aside class="intro-aside">
+        <div class="intro-mark">P.</div>
+        <p>Maison fondée<br><span>en MMXX</span></p>
+        <p>Deux ateliers<br><span>Paris · Saint-Tropez</span></p>
+        <p>Sur invitation<br><span>uniquement</span></p>
+      </aside>
+
+      <div class="intro-body">
+        <p class="reveal">Parissim Event n'est pas une agence. C'est une <i>maison</i> — fondée par des passionnés du beau geste, animée par une obsession du détail, dédiée à une clientèle qui sait que l'exceptionnel ne se négocie pas.</p>
+        <p class="reveal reveal-delay-1">Nous concevons des moments rares. Une soirée privée dans un hôtel particulier, un dîner intime sur la Méditerranée, un lancement de marque devenu événement de saison. Chaque projet est <i>unique</i>, confidentiel, signé.</p>
+        <p class="reveal reveal-delay-2">Entre Paris et Saint-Tropez, notre atelier réunit créatifs, scénographes, photographes, chefs et partenaires d'exception. Au service d'une seule chose : la vôtre.</p>
+        <div class="signature reveal reveal-delay-3">— La Maison Parissim.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto-pin">
+    <div class="manifesto-bg-img b1"></div>
+    <div class="manifesto-bg-img b2"></div>
+    <div class="manifesto-bg-img b3"></div>
+    <div class="manifesto-bg-img b4"></div>
+
+    <div class="manifesto-content">
+      <div class="manifesto-step active">
+        <div class="manifesto-step-inner">
+          <div>
+            <div class="step-num">Chapitre I · Manifeste</div>
+            <h2>Concevoir des <i>moments</i> qui restent.</h2>
+          </div>
+          <div class="step-body">Nous ne produisons pas des événements — nous composons des souvenirs. Lumière, parfum, son, geste : tout est pensé pour qu'on s'en souvienne longtemps.</div>
+        </div>
+      </div>
+
+      <div class="manifesto-step">
+        <div class="manifesto-step-inner">
+          <div>
+            <div class="step-num">Chapitre II · Vision</div>
+            <h2>Du dîner privé au <i>lancement</i> de saison.</h2>
+          </div>
+          <div class="step-body">De vingt invités triés à cinq cents conviés, l'exigence est la même. La discrétion d'un hôtel particulier, l'impact d'une ouverture de maison.</div>
+        </div>
+      </div>
+
+      <div class="manifesto-step">
+        <div class="manifesto-step-inner">
+          <div>
+            <div class="step-num">Chapitre III · Méthode</div>
+            <h2>Un <i>réseau</i> sélectionné, jamais imposé.</h2>
+          </div>
+          <div class="step-body">Chefs étoilés, fleuristes d'auteur, mixologistes, scénographes. Notre carnet n'est pas un annuaire — c'est une signature.</div>
+        </div>
+      </div>
+
+      <div class="manifesto-step">
+        <div class="manifesto-step-inner">
+          <div>
+            <div class="step-num">Chapitre IV · Promesse</div>
+            <h2>L'<i>exclusivité</i> comme seule règle.</h2>
+          </div>
+          <div class="step-body">Nous limitons volontairement le nombre de projets pris en charge. Pour que chaque maison cliente reçoive l'attention qu'elle mérite.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="manifesto-progress">
+      <div class="active">I</div>
+      <div>II</div>
+      <div>III</div>
+      <div>IV</div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERS -->
+<section class="univers" id="univers">
+  <div class="container">
+    <div class="chapter reveal">Chapitre V <i>· Univers</i></div>
+    <div class="univers-head">
+      <h2 class="h-display reveal reveal-delay-1">Sept terrains<br>de <i>création</i>.</h2>
+      <p class="lead reveal reveal-delay-2">Sept univers, une exigence commune : transformer chaque rencontre en expérience signée Parissim. De la soirée intime au lancement de marque internationale, chaque projet est mené par un chef d'orchestre dédié.</p>
+    </div>
+
+    <div class="univers-grid">
+      <div class="card lg reveal">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1800&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">01 · Signature</div></div>
+          <div>
+            <h3 class="card-title">Soirées privées<br><i>& dîners</i> d'exception</h3>
+            <div class="card-meta">Concept · Scénographie · Service</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card md reveal reveal-delay-1">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1400&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">02 · Drive</div></div>
+          <div>
+            <h3 class="card-title">Événements<br><i>automobile</i></h3>
+            <div class="card-meta">Rassemblements · Clubs · Lancements</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card sm reveal">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1530686577708-37db1c1c1e34?w=1200&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">03 · Splash</div></div>
+          <div>
+            <h3 class="card-title">Pool<br><i>parties</i></h3>
+            <div class="card-meta">Côte d'Azur · Île-de-France</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card sm reveal reveal-delay-1">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">04 · Corporate</div></div>
+          <div>
+            <h3 class="card-title">Séminaires<br><i>& corporate</i></h3>
+            <div class="card-meta">Direction · Marques · B2B</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card sm reveal reveal-delay-2">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1200&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">05 · Lens</div></div>
+          <div>
+            <h3 class="card-title">Shooting<br><i>photo & vidéo</i></h3>
+            <div class="card-meta">Production · Direction artistique</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card wide reveal">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1800&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">06 · Lancement</div></div>
+          <div>
+            <h3 class="card-title">Lancements<br><i>de produits</i></h3>
+            <div class="card-meta">Stratégie · Scénographie · Influence</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+
+      <div class="card sm reveal reveal-delay-1">
+        <div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=90&auto=format&fit=crop')"></div>
+        <div class="card-content">
+          <div><div class="card-num">07 · Social</div></div>
+          <div>
+            <h3 class="card-title">Communication<br><i>digitale</i></h3>
+            <div class="card-meta">Instagram · TikTok · LinkedIn</div>
+          </div>
+        </div>
+        <div class="card-mark"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG QUOTE -->
+<section class="bigshot">
+  <div class="bigshot-bg" id="bigshotBg"></div>
+  <div class="bigshot-text">
+    <span class="quote-mark">«</span>
+    <h2>Le luxe véritable n'est pas dans ce qu'on voit, mais dans ce qu'on <i>ressent</i> en quittant la pièce.</h2>
+    <div class="attrib"><span>—</span> Maison Parissim · MMXXVI</div>
+  </div>
+</section>
+
+<!-- CITIES -->
+<section class="cities">
+  <div class="city paris">
+    <div class="city-bg"></div>
+    <div class="city-content">
+      <div class="num">Atelier · 01</div>
+      <h3>Paris<i>.</i></h3>
+      <p>L'élégance discrète des hôtels particuliers, les rooftops confidentiels, l'art parisien de recevoir. Notre maison-mère, ouverte toute l'année.</p>
+      <div class="meta">
+        <div><strong>Adresse</strong>Île-de-France</div>
+        <div><strong>Saison</strong>Toute l'année</div>
+      </div>
+    </div>
+  </div>
+  <div class="city st-tropez">
+    <div class="city-bg"></div>
+    <div class="city-content">
+      <div class="num">Atelier · 02</div>
+      <h3>Saint-Tropez<i>.</i></h3>
+      <p>Le sun-soaked lifestyle méditerranéen, les villas privées de Pampelonne, les yachts à quai. Notre atelier d'été, sur la Côte d'Azur.</p>
+      <div class="meta">
+        <div><strong>Adresse</strong>Côte d'Azur</div>
+        <div><strong>Saison</strong>Mai — Septembre</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIBLES -->
+<section class="cibles">
+  <div class="container">
+    <div class="chapter reveal">Chapitre VI <i>· Clientèle</i></div>
+    <div class="cibles-head">
+      <h2 class="h-display reveal reveal-delay-1">Pour qui nous <i>créons</i>.</h2>
+      <p class="lead reveal reveal-delay-2">Particuliers exigeants, maisons internationales, clubs privés. Nous travaillons en confiance avec une clientèle qui partage notre amour du beau geste.</p>
+    </div>
+
+    <div class="cibles-grid">
+      <div class="cible reveal">
+        <div>
+          <div class="num">I</div>
+          <h4>Particuliers<br><i>haut de gamme</i></h4>
+        </div>
+        <p>Anniversaires, célébrations privées, dîners d'auteur.</p>
+      </div>
+      <div class="cible reveal reveal-delay-1">
+        <div>
+          <div class="num">II</div>
+          <h4>Maisons<br><i>& marques</i></h4>
+        </div>
+        <p>Lancements, séminaires, conventions, soirées corporate.</p>
+      </div>
+      <div class="cible reveal reveal-delay-2">
+        <div>
+          <div class="num">III</div>
+          <h4>Clubs<br><i>automobiles</i></h4>
+        </div>
+        <p>Rassemblements, drive days, expositions privées.</p>
+      </div>
+      <div class="cible reveal reveal-delay-3">
+        <div>
+          <div class="num">IV</div>
+          <h4>Lieux<br><i>d'exception</i></h4>
+        </div>
+        <p>Hôtels, rooftops, restaurants étoilés, villas privées.</p>
+      </div>
+      <div class="cible reveal reveal-delay-4">
+        <div>
+          <div class="num">V</div>
+          <h4>Créateurs<br><i>& influence</i></h4>
+        </div>
+        <p>Collaborations, contenus, présence digitale signée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press">
+  <div class="container">
+    <div class="press-label"><span>—</span> Ils nous ont fait confiance <span>—</span></div>
+    <div class="press-track">
+      <div class="press-name">Maison <i>Privée</i></div>
+      <div class="press-name">Hôtel <i>Particulier</i></div>
+      <div class="press-name">Côte <i>d'Azur Club</i></div>
+      <div class="press-name">Atelier <i>Roma</i></div>
+      <div class="press-name">Yacht <i>Society</i></div>
+      <div class="press-name">Vendôme <i>Edit</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="chapter reveal">Chapitre VII <i>· Chiffres</i></div>
+    <h2 class="h-display reveal reveal-delay-1" style="max-width:18ch">L'exigence comme <i>seule</i> mesure.</h2>
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num"><span class="plus">+</span>150</div>
+        <div class="stat-label">Événements signés</div>
+        <div class="stat-sub">depuis 2020</div>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <div class="stat-num"><span class="plus">+</span>40</div>
+        <div class="stat-label">Maisons partenaires</div>
+        <div class="stat-sub">en France & à l'international</div>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat-num">II</div>
+        <div class="stat-label">Ateliers</div>
+        <div class="stat-sub">Paris · Saint-Tropez</div>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <div class="stat-num">100<span class="plus">%</span></div>
+        <div class="stat-label">Sur-mesure</div>
+        <div class="stat-sub">jamais deux fois le même projet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="chapter reveal">Chapitre VIII <i>· Process</i></div>
+    <div class="cibles-head">
+      <h2 class="h-display reveal reveal-delay-1">De l'idée<br>au <i>moment</i>.</h2>
+      <p class="lead reveal reveal-delay-2">Une méthode rigoureuse, une équipe restreinte, une exécution sans compromis. Chaque étape pensée pour servir l'expérience — jamais l'inverse.</p>
+    </div>
+
+    <div class="process-list">
+      <div class="process-item reveal">
+        <div class="process-num">I</div>
+        <h3 class="process-title">Brief <i>& vision</i></h3>
+        <p class="process-desc">Compréhension du projet, des intentions, du public. Nous définissons le ton, le format, l'ambition, le budget.</p>
+        <div class="process-arrow"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">II</div>
+        <h3 class="process-title">Conception <i>créative</i></h3>
+        <p class="process-desc">Scénographie, identité visuelle, sélection des partenaires de la maison. Tout est conçu sur-mesure pour produire un univers cohérent et signé.</p>
+        <div class="process-arrow"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">III</div>
+        <h3 class="process-title">Production <i>& orchestration</i></h3>
+        <p class="process-desc">Coordination logistique, techniciens, DJ, traiteurs, animations. Un chef de projet dédié, un seul interlocuteur, une exécution irréprochable.</p>
+        <div class="process-arrow"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+      <div class="process-item reveal">
+        <div class="process-num">IV</div>
+        <h3 class="process-title">Captation <i>& diffusion</i></h3>
+        <p class="process-desc">Photo, vidéo, reels, contenu digital. Pour que le moment continue d'exister bien après la nuit — et que votre maison rayonne.</p>
+        <div class="process-arrow"><svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.1"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-glow"></div>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="chapter reveal">Chapitre IX <i>· Sur invitation</i></div>
+        <h2 class="h-display reveal reveal-delay-1">Parlons de votre <i>prochain</i> moment.</h2>
+        <p class="lead reveal reveal-delay-2">Un projet, une intention, une date à célébrer. Décrivez-nous votre vision — un membre de la maison reviendra vers vous personnellement sous vingt-quatre heures.</p>
+
+        <div class="contact-meta">
+          <div class="reveal">
+            <span>Demande directe</span>
+            <a href="mailto:contact@parissim-event.fr">contact@parissim-event.fr</a>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <span>Ateliers</span>
+            <p>Paris · Île-de-France<br>Saint-Tropez · Côte d'Azur</p>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <span>Suivez la maison</span>
+            <p>Instagram · TikTok · LinkedIn</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form reveal reveal-delay-2" onsubmit="handleSubmit(event)">
+        <div class="form-grid-2">
+          <div class="field">
+            <input type="text" id="firstName" required>
+            <label for="firstName">Prénom</label>
+          </div>
+          <div class="field">
+            <input type="text" id="lastName" required>
+            <label for="lastName">Nom</label>
+          </div>
+        </div>
+        <div class="field">
+          <input type="email" id="email" required>
+          <label for="email">Adresse email</label>
+        </div>
+        <div class="field">
+          <input type="tel" id="phone">
+          <label for="phone">Téléphone</label>
+        </div>
+        <div class="field filled">
+          <select id="type" required>
+            <option value="" disabled selected>—</option>
+            <option>Soirée privée</option>
+            <option>Événement automobile</option>
+            <option>Pool party</option>
+            <option>Séminaire / Corporate</option>
+            <option>Lancement de produit</option>
+            <option>Shooting photo / vidéo</option>
+            <option>Communication digitale</option>
+            <option>Autre projet sur-mesure</option>
+          </select>
+          <label for="type" style="top:-8px;font-size:9px;color:var(--bronze)">Nature du projet</label>
+        </div>
+        <div class="field">
+          <textarea id="message" required></textarea>
+          <label for="message">Décrivez votre vision</label>
+        </div>
+        <p class="privacy">En soumettant cette demande, vous acceptez que la Maison Parissim traite vos données afin de répondre à votre projet, dans le respect de notre <a href="#">politique de confidentialité</a>. Toutes les informations transmises sont confidentielles.</p>
+        <button type="submit" class="submit">Envoyer la demande →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2 class="h-display">Maison <i>Parissim</i>.</h2>
+        <p>Maison événementielle d'exception. Paris · Saint-Tropez · Côte d'Azur. Sur invitation uniquement.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Univers</h5>
+        <ul>
+          <li><a href="#">Soirées privées</a></li>
+          <li><a href="#">Automobile</a></li>
+          <li><a href="#">Corporate</a></li>
+          <li><a href="#">Lancements</a></li>
+          <li><a href="#">Communication</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Maison</h5>
+        <ul>
+          <li><a href="#">Manifeste</a></li>
+          <li><a href="#">Process</a></li>
+          <li><a href="#">Partenaires</a></li>
+          <li><a href="#">Presse</a></li>
+          <li><a href="#">Carrières</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:contact@parissim-event.fr">Email</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Snapchat</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-mark">parissim</div>
+
+    <div class="footer-bottom">
+      <div>© MMXXVI <a href="#">Maison Parissim</a> — Tous droits réservés.</div>
+      <div><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PARISSIM — interactions
+============================================================ */
+
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+});
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}, { passive: true });
+
+/* Curseur sur-mesure */
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+window.addEventListener('mousemove', (e) => {
+  mx = e.clientX; my = e.clientY;
+  cursorDot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+});
+function ringLoop() {
+  rx += (mx - rx) * 0.18;
+  ry += (my - ry) * 0.18;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+  requestAnimationFrame(ringLoop);
+}
+ringLoop();
+document.querySelectorAll('a, button, .card, .cible, .city, .press-name').forEach(el => {
+  el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+});
+
+/* Hero scroll-driven */
+const hero = document.getElementById('hero');
+const heroBg = document.getElementById('heroBg');
+const heroInner = document.getElementById('heroInner');
+
+function heroTick() {
+  const rect = hero.getBoundingClientRect();
+  const total = hero.offsetHeight - window.innerHeight;
+  const p = Math.max(0, Math.min(1, -rect.top / total));
+
+  const scale = 1 + p * 0.4;
+  const blur = p * 4;
+  const bright = 0.5 - p * 0.2;
+  heroBg.style.transform = `scale(${scale.toFixed(3)})`;
+  heroBg.style.filter = `brightness(${bright.toFixed(2)}) saturate(0.85) contrast(1.05) blur(${blur.toFixed(1)}px)`;
+
+  const opacity = Math.max(0, 1 - p * 1.5);
+  const ty = p * -80;
+  heroInner.style.opacity = opacity.toFixed(3);
+  heroInner.style.transform = `translateY(${ty}px)`;
+}
+let heroRaf;
+window.addEventListener('scroll', () => {
+  if (heroRaf) return;
+  heroRaf = requestAnimationFrame(() => { heroTick(); heroRaf = null; });
+}, { passive: true });
+heroTick();
+
+/* Manifesto scrollytelling */
+const manifesto = document.getElementById('manifesto');
+const steps = manifesto.querySelectorAll('.manifesto-step');
+const bgs = manifesto.querySelectorAll('.manifesto-bg-img');
+const dots = manifesto.querySelectorAll('.manifesto-progress div');
+
+function manifestoTick() {
+  const rect = manifesto.getBoundingClientRect();
+  const total = manifesto.offsetHeight - window.innerHeight;
+  const p = Math.max(0, Math.min(0.999, -rect.top / total));
+  const idx = Math.floor(p * steps.length);
+
+  steps.forEach((el, i) => el.classList.toggle('active', i === idx));
+  bgs.forEach((el, i) => el.classList.toggle('active', i === idx));
+  dots.forEach((el, i) => el.classList.toggle('active', i === idx));
+}
+let manRaf;
+window.addEventListener('scroll', () => {
+  if (manRaf) return;
+  manRaf = requestAnimationFrame(() => { manifestoTick(); manRaf = null; });
+}, { passive: true });
+manifestoTick();
+
+/* Big parallax */
+const bigshotBg = document.getElementById('bigshotBg');
+function bigTick() {
+  if (!bigshotBg) return;
+  const rect = bigshotBg.parentElement.getBoundingClientRect();
+  const vh = window.innerHeight;
+  if (rect.top > vh || rect.bottom < 0) return;
+  const p = (vh - rect.top) / (vh + rect.height);
+  bigshotBg.style.transform = `translate3d(0, ${(p - 0.5) * 100}px, 0)`;
+}
+window.addEventListener('scroll', () => requestAnimationFrame(bigTick), { passive: true });
+bigTick();
+
+/* Reveal */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Form */
+document.querySelectorAll('.field input, .field textarea').forEach(input => {
+  input.addEventListener('blur', () => {
+    if (input.value.trim() !== '') input.parentElement.classList.add('filled');
+    else input.parentElement.classList.remove('filled');
+  });
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.submit');
+  btn.textContent = 'Demande reçue ✓';
+  btn.style.background = 'transparent';
+  btn.style.color = 'var(--bronze-light)';
+  setTimeout(() => {
+    e.target.reset();
+    btn.textContent = 'Envoyer la demande →';
+    btn.style.background = 'var(--bronze)';
+    btn.style.color = 'var(--bg)';
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('filled'));
+  }, 2800);
+}
+</script>
+
+</body>
+</html>

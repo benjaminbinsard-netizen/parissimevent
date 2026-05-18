@@ -1,0 +1,32 @@
+// Maison Parissim — schéma base de données
+//
+// Postgres (Neon) en local ET en production. Les variables DATABASE_URL
+// (poolée) et DATABASE_URL_UNPOOLED (directe) sont fournies par
+// l'intégration Vercel/Neon.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")          // connexion poolée (runtime)
+  directUrl = env("DATABASE_URL_UNPOOLED") // connexion directe (migrations)
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  type      String
+  message   String
+  status    String   @default("new") // new | read | archived
+  source    String   @default("site")
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([status])
+}

@@ -1,0 +1,19 @@
+# Maison Parissim — robots.txt
+# Le site vitrine est indexable ; l'espace privé et l'API ne le sont pas.
+
+User-agent: *
+Allow: /$
+Allow: /og
+Allow: /favicon.svg
+Allow: /site.webmanifest
+Disallow: /admin
+Disallow: /api/
+
+# Bots indésirables (scraping IA / SEO agressif) — optionnel
+User-agent: AhrefsBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+
+Sitemap: https://parissim.vercel.app/sitemap.xml
+Host: https://parissim.vercel.app
