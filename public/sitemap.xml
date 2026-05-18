@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://parissim.vercel.app/</loc>
+    <loc>https://www.parissimevent.fr/</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://parissim.vercel.app/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://parissim.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.parissimevent.fr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.parissimevent.fr/" />
   </url>
 </urlset>

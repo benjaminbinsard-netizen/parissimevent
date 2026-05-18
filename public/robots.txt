@@ -15,5 +15,5 @@ Disallow: /
 User-agent: SemrushBot
 Disallow: /
 
-Sitemap: https://parissim.vercel.app/sitemap.xml
-Host: https://parissim.vercel.app
+Sitemap: https://www.parissimevent.fr/sitemap.xml
+Host: https://www.parissimevent.fr
