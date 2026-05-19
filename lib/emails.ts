@@ -47,7 +47,7 @@ ${inner}
 </table>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 <tr><td style="padding:22px 8px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#5a5247;">
-Maison Parissim · Paris · Saint-Tropez · Côte d'Azur
+ParissimEvent · Paris · Saint-Tropez · Côte d'Azur
 </td></tr></table>
 </td></tr></table></body></html>`;
 }
@@ -66,7 +66,7 @@ export function clientConfirmationEmail(lead: LeadData): {
   subject: string;
   html: string;
 } {
-  const subject = "Votre demande a bien été reçue — Maison Parissim";
+  const subject = "Votre demande a bien été reçue — ParissimEvent";
   const html = shell(`
 ${header()}
 <tr><td style="padding:40px 44px;font-family:Arial,Helvetica,sans-serif;color:${TEXT};">
@@ -103,7 +103,7 @@ ${header()}
   </p>
   <p style="margin:26px 0 0;font-family:Georgia,serif;font-size:15px;color:${TEXT};">
     Avec toute notre considération,<br>
-    <span style="color:${BRONZE_LIGHT};font-style:italic;">La Maison Parissim</span>
+    <span style="color:${BRONZE_LIGHT};font-style:italic;">La ParissimEvent</span>
   </p>
 </td></tr>`);
   return { subject, html };

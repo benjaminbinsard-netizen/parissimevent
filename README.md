@@ -1,4 +1,4 @@
-# Maison Parissim — Site + Dashboard
+# ParissimEvent — Site + Dashboard
 
 Site éditorial premium (inchangé) + formulaire de contact **réellement
 fonctionnel** + dashboard privé **temps réel** + emails de confirmation.

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maison Parissim — Console",
+  title: "ParissimEvent — Console",
   description: "Espace privé — gestion des demandes.",
   robots: { index: false, follow: false },
 };

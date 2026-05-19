@@ -42,7 +42,7 @@ export async function sendMail(
 
   try {
     await transport.sendMail({
-      from: process.env.MAIL_FROM || "Maison Parissim <no-reply@localhost>",
+      from: process.env.MAIL_FROM || "ParissimEvent <no-reply@localhost>",
       to: args.to,
       subject: args.subject,
       html: args.html,
