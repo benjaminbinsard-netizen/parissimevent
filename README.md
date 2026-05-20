@@ -1,4 +1,4 @@
-# ParissimEvent — Site + Dashboard
+# Parissim Event — Site + Dashboard
 
 Site éditorial premium (inchangé) + formulaire de contact **réellement
 fonctionnel** + dashboard privé **temps réel** + emails de confirmation.
