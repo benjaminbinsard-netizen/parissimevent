@@ -615,8 +615,16 @@ section { position: relative; }
   gap: 100px;
   align-items: start;
 }
-@media (max-width: 980px) { .intro-grid { grid-template-columns: 1fr; gap: 48px; } }
 .intro-aside { position: sticky; top: 140px; }
+/* Mobile / tablet : on stack en 1 colonne et on désactive le sticky pour
+   éviter que l'aside (P. + Maison fondée + Sur invitation) ne reste
+   collé en haut pendant que le corps défile derrière. */
+@media (max-width: 980px) {
+  .intro-grid { grid-template-columns: 1fr; gap: 48px; }
+  .intro-aside { position: static; top: auto; }
+  .intro-mark { font-size: clamp(64px, 18vw, 120px); }
+  .intro-aside p { margin-top: 20px; }
+}
 .intro-mark {
   font-family: var(--f-display);
   font-style: italic;
@@ -657,6 +665,17 @@ section { position: relative; }
   font-weight: 300;
 }
 .intro-body p i { font-style: italic; color: var(--bronze-light); }
+.intro-body .intro-label {
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin: 48px 0 24px;
+  font-weight: 400;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  max-width: 16em;
+}
 .intro-body .signature {
   font-family: var(--f-display);
   font-style: italic;
@@ -1532,10 +1551,12 @@ footer {
       </aside>
 
       <div class="intro-body">
-        <p class="reveal">Parissim Event n'est pas une agence. C'est une <i>maison</i> — fondée par des passionnés du beau geste, animée par une obsession du détail, dédiée à une clientèle qui sait que l'exceptionnel ne se négocie pas.</p>
-        <p class="reveal reveal-delay-1">Nous concevons des moments rares. Une soirée privée dans un hôtel particulier, un dîner intime sur la Méditerranée, un lancement de marque devenu événement de saison. Chaque projet est <i>unique</i>, confidentiel, signé.</p>
-        <p class="reveal reveal-delay-2">Entre Paris et Saint-Tropez, notre atelier réunit créatifs, scénographes, photographes, chefs et partenaires d'exception. Au service d'une seule chose : la vôtre.</p>
-        <div class="signature reveal reveal-delay-3">— La Parissim Event.</div>
+        <p class="reveal">Parissim Event est une <i>maison</i> dédiée aux expériences élégantes et confidentielles.</p>
+        <p class="reveal reveal-delay-1">Nous imaginons des événements sur mesure, pensés avec goût, précision et discrétion.</p>
+        <div class="intro-label reveal reveal-delay-2">L'art de recevoir</div>
+        <p class="reveal reveal-delay-2">Dîners privés, réceptions exclusives, lancements de marque ou soirées d'exception&nbsp;: chaque projet est conçu comme un moment <i>unique</i>.</p>
+        <p class="reveal reveal-delay-3">Entre Paris et Saint-Tropez, nous réunissons créatifs, chefs, photographes et partenaires d'excellence pour donner vie à des instants mémorables.</p>
+        <div class="signature reveal reveal-delay-3">— Parissim Event.</div>
       </div>
     </div>
   </div>
