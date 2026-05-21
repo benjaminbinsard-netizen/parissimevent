@@ -101,7 +101,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@200;300;400;500&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================================
@@ -1168,8 +1168,24 @@ section { position: relative; }
   opacity: 1;
   transform: translateY(-2px);
 }
+.press-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: 0.02em;
+  color: var(--text-warm);
+  opacity: 0.95;
+  white-space: nowrap;
+  transition: opacity 0.4s ease, transform 0.4s ease, color 0.4s ease;
+}
+.press-text:hover {
+  opacity: 1;
+  color: var(--bronze-light);
+  transform: translateY(-2px);
+}
 @media (max-width: 720px) {
   .press-logo { height: clamp(44px, 11vw, 72px); max-width: 44vw; }
+  .press-text { font-size: clamp(16px, 4.2vw, 22px); }
 }
 
 /* ==================================================================
@@ -1829,7 +1845,7 @@ footer {
       <img class="press-logo" src="/logos/ambrosia.png" alt="Ambrosia" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/cabaia.png" alt="Cabaïa" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/canal_plus.png" alt="Canal+" loading="lazy" decoding="async">
-      <img class="press-logo" src="/logos/francois_binsard.png" alt="François Binsard" loading="lazy" decoding="async">
+      <span class="press-text">François Binsard Invest</span>
       <img class="press-logo" src="/logos/klypad.png" alt="Klypad" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/lamborghini.png" alt="Lamborghini" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/maison_sarah_lavoine.png" alt="Maison Sarah Lavoine" loading="lazy" decoding="async">
@@ -1838,7 +1854,7 @@ footer {
       <img class="press-logo" src="/logos/paris_society.png" alt="Paris Society" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/pernod_ricard.png" alt="Pernod Ricard" loading="lazy" decoding="async">
       <img class="press-logo" src="/logos/simply_fy_club_paris.png" alt="Simply Fy Club Paris" loading="lazy" decoding="async">
-      <img class="press-logo" src="/logos/villa_french_paradise.png" alt="Villa French Paradise" loading="lazy" decoding="async">
+      <span class="press-text">Villa French Paradise</span>
     </div>
   </div>
 </section>
@@ -2066,7 +2082,7 @@ function ringLoop() {
   requestAnimationFrame(ringLoop);
 }
 ringLoop();
-document.querySelectorAll('a, button, .card, .cible, .city, .press-name, .press-logo').forEach(el => {
+document.querySelectorAll('a, button, .card, .cible, .city, .press-name, .press-logo, .press-text').forEach(el => {
   el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
   el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
 });
