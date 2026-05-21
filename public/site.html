@@ -1140,9 +1140,9 @@ section { position: relative; }
 .press-track {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 60px 80px;
+  gap: clamp(28px, 4vw, 56px) clamp(36px, 5vw, 72px);
 }
 .press-name {
   font-family: var(--f-display);
@@ -1155,6 +1155,23 @@ section { position: relative; }
 }
 .press-name:hover { opacity: 1; color: var(--bronze); }
 .press-name i { font-style: italic; }
+.press-logo {
+  height: clamp(36px, 4.5vw, 60px);
+  width: auto;
+  max-width: clamp(120px, 14vw, 180px);
+  object-fit: contain;
+  opacity: 0.65;
+  filter: grayscale(1) brightness(0) invert(0.85);
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+}
+.press-logo:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1) invert(0);
+  transform: translateY(-2px);
+}
+@media (max-width: 720px) {
+  .press-logo { height: clamp(28px, 7vw, 44px); max-width: 38vw; }
+}
 
 /* ==================================================================
    STATS
@@ -1809,12 +1826,20 @@ footer {
   <div class="container">
     <div class="press-label"><span>—</span> Ils nous ont fait confiance <span>—</span></div>
     <div class="press-track">
-      <div class="press-name">Maison <i>Privée</i></div>
-      <div class="press-name">Hôtel <i>Particulier</i></div>
-      <div class="press-name">Côte <i>d'Azur Club</i></div>
-      <div class="press-name">Atelier <i>Roma</i></div>
-      <div class="press-name">Yacht <i>Society</i></div>
-      <div class="press-name">Vendôme <i>Edit</i></div>
+      <img class="press-logo" src="/logos/aldosia.png" alt="Aldosia" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/ambrosia.png" alt="Ambrosia" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/cabaia.png" alt="Cabaïa" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/canal_plus.png" alt="Canal+" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/francois_binsard.png" alt="François Binsard" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/klypad.png" alt="Klypad" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/lamborghini.png" alt="Lamborghini" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/maison_sarah_lavoine.png" alt="Maison Sarah Lavoine" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/mclaren_paris.png" alt="McLaren Paris" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/moon_glow.png" alt="Moon Glow" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/paris_society.png" alt="Paris Society" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/pernod_ricard.png" alt="Pernod Ricard" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/simply_fy_club_paris.png" alt="Simply Fy Club Paris" loading="lazy" decoding="async">
+      <img class="press-logo" src="/logos/villa_french_paradise.png" alt="Villa French Paradise" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -2042,7 +2067,7 @@ function ringLoop() {
   requestAnimationFrame(ringLoop);
 }
 ringLoop();
-document.querySelectorAll('a, button, .card, .cible, .city, .press-name').forEach(el => {
+document.querySelectorAll('a, button, .card, .cible, .city, .press-name, .press-logo').forEach(el => {
   el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
   el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
 });
