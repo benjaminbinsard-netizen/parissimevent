@@ -58,31 +58,47 @@ export async function POST(req: Request) {
 
   const ip = clientIp(req);
 
-  // Anti-spam léger : pas deux envois de la même IP en moins de 20 s.
-  if (ip) {
-    const recent = await prisma.lead.findFirst({
-      where: { ip, createdAt: { gt: new Date(Date.now() - 20_000) } },
-      select: { id: true },
-    });
-    if (recent) {
-      return NextResponse.json(
-        { ok: false, error: "Demande déjà envoyée. Merci de patienter." },
-        { status: 429 },
-      );
+  let lead;
+  try {
+    // Anti-spam léger : pas deux envois de la même IP en moins de 20 s.
+    if (ip) {
+      const recent = await prisma.lead.findFirst({
+        where: { ip, createdAt: { gt: new Date(Date.now() - 20_000) } },
+        select: { id: true },
+      });
+      if (recent) {
+        return NextResponse.json(
+          { ok: false, error: "Demande déjà envoyée. Merci de patienter." },
+          { status: 429 },
+        );
+      }
     }
-  }
 
-  const lead = await prisma.lead.create({
-    data: {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      phone: data.phone || null,
-      type: data.type,
-      message: data.message,
-      ip,
-    },
-  });
+    lead = await prisma.lead.create({
+      data: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone || null,
+        type: data.type,
+        message: data.message,
+        ip,
+      },
+    });
+  } catch (e) {
+    // Echec base de données (ex. DATABASE_URL absente, table non migrée).
+    // On loggue la cause réelle (visible dans les logs Vercel) et on
+    // renvoie un message clair plutôt qu'une 500 opaque.
+    console.error("[contact] échec d'enregistrement en base:", e);
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "Le service d'enregistrement est momentanément indisponible. Merci de réessayer plus tard.",
+      },
+      { status: 503 },
+    );
+  }
 
   // Emails — best effort, n'empêchent jamais le succès de la demande.
   const leadData: LeadData = lead;
